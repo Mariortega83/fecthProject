@@ -1,0 +1,9 @@
+.nav-link, .dropdown-item {
+    cursor: pointer;
+}
+
+.cotainer-songs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
