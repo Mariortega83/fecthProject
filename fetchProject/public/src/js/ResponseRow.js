@@ -12,11 +12,13 @@ export default class ResponseRow {
         div.appendChild(this.#createLabeledElement('Artist', artista));
         div.appendChild(this.#createLabeledElement('Duration', duracion));
         div.appendChild(this.#createLabeledElement('Genre', genero));
-        div.appendChild(this.#createLabeledElement('Created by', user.name));
-        div.appendChild(this.#createLabeledElement('Created by', user.id));
 
-        
-        
+        // Verificar si 'user' existe antes de acceder a sus propiedades
+        const userName = user && user.name ? user.name : 'Unknown User';
+        const userId = user && user.id ? user.id : 'Unknown ID';
+
+        div.appendChild(this.#createLabeledElement('Created by', userName));
+        div.appendChild(this.#createLabeledElement('User ID', userId));
 
         const buttonSection = document.createElement('div');
         buttonSection.classList.add('d-flex', 'justify-content-between', 'mt-2');
