@@ -17,7 +17,10 @@ return new class extends Migration
             $table->string('nombre');
             $table->integer('duracion');
             $table->string('genero');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
+
+            
         });
     }
 

@@ -39,8 +39,11 @@ export default class ResponseContent {
         });
 
         result.songs.data.forEach(element => {
+            console.log("Canción recibida en la lista:", element);
+            console.log("Usuario que creó la canción:", element.user_id);
             this.responseRow.add(element);
         });
+        
     }
 
     setUserContent(user) {
@@ -106,27 +109,30 @@ export default class ResponseContent {
     
 
     setNoUserContent() {
+        let baseUrl = window.location.origin + "/projects/fecthProject/fetchProject/public";
+    
         let listItem = document.createElement('li');
         listItem.classList.add('nav-item');
-
+    
         let aElement = document.createElement('a');
         aElement.classList.add('nav-link');
-        aElement.href = '/projects/fecthProject/fetchProject/public/login'; // Redirigir a la página de login
+        aElement.href = baseUrl + "/login"; // Redirigir a la página de login
         let textNode = document.createTextNode('Login');
-
+    
         aElement.appendChild(textNode);
         listItem.appendChild(aElement);
         this.userContent.appendChild(listItem);
-
+    
         listItem = document.createElement('li');
         listItem.classList.add('nav-item');
         aElement = document.createElement('a');
         aElement.classList.add('nav-link');
-        aElement.href = '/projects/fecthProject/fetchProject/public/register'; // Redirigir a la página de registro
+        aElement.href = baseUrl + "/register"; // Redirigir a la página de registro
         textNode = document.createTextNode('Register');
-
+    
         aElement.appendChild(textNode);
         listItem.appendChild(aElement);
         this.userContent.appendChild(listItem);
     }
+    
 }

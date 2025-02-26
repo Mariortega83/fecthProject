@@ -4,7 +4,7 @@ export default class ResponseRow {
         this.currentPage = currentPage;
     }
 
-    add({ id, nombre, artista, duracion, genero }) {
+    add({ id, nombre, artista, duracion, genero, user }) {
         const div = document.createElement('div');
         div.classList.add('card', 'mb-3', 'p-3');
 
@@ -12,6 +12,11 @@ export default class ResponseRow {
         div.appendChild(this.#createLabeledElement('Artist', artista));
         div.appendChild(this.#createLabeledElement('Duration', duracion));
         div.appendChild(this.#createLabeledElement('Genre', genero));
+        div.appendChild(this.#createLabeledElement('Created by', user.name));
+        div.appendChild(this.#createLabeledElement('Created by', user.id));
+
+        
+        
 
         const buttonSection = document.createElement('div');
         buttonSection.classList.add('d-flex', 'justify-content-between', 'mt-2');

@@ -20,8 +20,9 @@ class CancionController extends Controller
      */
     public function index(Request $request)
     {
+        $songs = Cancion::with('user')->orderBy('nombre')->paginate(4);
         return response()->json([
-            'songs' => Cancion::orderBy('nombre')->paginate(4),
+            'songs' => $songs,
             'user' => Auth::user()
         ]);
     }
@@ -60,6 +61,7 @@ class CancionController extends Controller
         $song->artista = $request->artista;
         $song->duracion = $request->duracion;
         $song->genero = $request->genero;
+        $song->user_id = Auth::id();
         $result = $song->save();
 
         return response()->json([
@@ -80,12 +82,12 @@ class CancionController extends Controller
      */
     public function show($id)
     {
-        $song = Cancion::find($id);
+        $song = Cancion::with('user')->find($id);
         $message = '';
         if ($song === null) {
             $message = 'Song not found.';
         }
-
+    
         return response()->json([
             'message' => $message,
             'song' => $song

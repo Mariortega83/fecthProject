@@ -47,7 +47,7 @@ export default class ModalEvents {
     this.modalView.addEventListener('show.bs.modal', event => {
       this.fetchUrl = event.relatedTarget.dataset.url;
       const title = event.relatedTarget.dataset.title;
-      this.httpClient.get(this.fetchUrl, {}, data => this.responseReview(data, title));
+      this.httpClient.get(this.fetchUrl, {}, data => this.responseSong(data, title));
     });
 
     // --- Modal de Crear Canción ---
@@ -120,7 +120,7 @@ export default class ModalEvents {
     }
   }
 
-  responseReview(song) {
+  responseSong(song) {
     console.log(song);
     const modalTitle = this.modalView.querySelector('.modal-title');
     const modalBody = this.modalView.querySelector('.modal-body');
@@ -133,6 +133,8 @@ export default class ModalEvents {
           <p class="card-text"><strong>Artist:</strong> ${song.song.artista}</p>
           <p class="card-text"><strong>Duration:</strong> ${song.song.duracion}</p>
           <p class="card-text"><strong>Genre:</strong> ${song.song.genero}</p>
+          <p class="card-text"><strong>Created by:</strong> ${song.song.user.name}</p>
+
         </div>
       </div>
     `;
@@ -213,6 +215,7 @@ export default class ModalEvents {
       <p><strong>Artist:</strong> ${song.artista}</p>
       <p><strong>Duration:</strong> ${song.duracion}</p>
       <p><strong>Genre:</strong> ${song.genero}</p>
+      <p><strong>Created by:</strong> ${song.user.name}</p>
     `;
   }
 

@@ -16,8 +16,15 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
 })->name('logout');
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
 // Rutas para el controlador de canciones
 Route::resource('song', CancionController::class)->except(['create', 'edit']);
 
-// Rutas de autenticación
 
