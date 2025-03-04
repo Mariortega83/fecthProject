@@ -120,25 +120,36 @@ export default class ModalEvents {
     }
   }
 
-  responseSong(song) {
-    console.log(song);
-    const modalTitle = this.modalView.querySelector('.modal-title');
-    const modalBody = this.modalView.querySelector('.modal-body');
+  responseSong(data) {
+    if (!data.song) {
+        const warning = document.getElementById('modalViewWarning');
+        if (warning) {
+            warning.style.display = 'block';
+            setTimeout(() => { warning.style.display = 'none'; }, 4000);
+        }
+        return;
+    }
 
-    modalTitle.textContent = song.song.nombre;
-    modalBody.innerHTML = `
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">${song.song.nombre}</h5>
-          <p class="card-text"><strong>Artist:</strong> ${song.song.artista}</p>
-          <p class="card-text"><strong>Duration:</strong> ${song.song.duracion}</p>
-          <p class="card-text"><strong>Genre:</strong> ${song.song.genero}</p>
-          <p class="card-text"><strong>Created by:</strong> ${song.song.user.name}</p>
-
-        </div>
-      </div>
+    // Update view modal content
+    const modalTitle = document.getElementById('viewModalLabel');
+    const viewSongs = document.getElementById('viewSongs');
+    
+    modalTitle.textContent = data.song.nombre;
+    viewSongs.innerHTML = `
+        <li class="list-group-item">
+            <strong>Artista:</strong> ${data.song.artista}
+        </li>
+        <li class="list-group-item">
+            <strong>Duración:</strong> ${data.song.duracion}
+        </li>
+        <li class="list-group-item">
+            <strong>Género:</strong> ${data.song.genero}
+        </li>
+        <li class="list-group-item">
+            <strong>Creado por:</strong> ${data.song.user.name}
+        </li>
     `;
-  }
+}
 
   formattedDate(date) {
     date = new Date(date);
@@ -220,10 +231,17 @@ export default class ModalEvents {
   }
 
   showMessage(message, type) {
-    this.messageElement.innerHTML = `<div class="alert alert-${type}" role="alert">${message}</div>`;
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `alert alert-${type}`;
+    messageDiv.role = 'alert';
+    messageDiv.textContent = message;
+    
+    this.messageElement.appendChild(messageDiv);
+    
     setTimeout(() => {
-      this.messageElement.innerHTML = '';
-    }, 4000);
+        messageDiv.style.opacity = '0';
+        setTimeout(() => messageDiv.remove(), 500);
+    }, 3500);
   }
 
   init() {

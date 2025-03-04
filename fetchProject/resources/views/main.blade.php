@@ -55,6 +55,7 @@
         <div class="container">
             <h1 class="mt-5">Canciones</h1>
             <p class="lead">Spotify, sube tu canción ya de ya</p>
+
             @auth
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal" data-url="/song">
                 Agregar Canción
@@ -62,7 +63,10 @@
             @endauth
 
             <!-- Elemento para mostrar mensajes -->
-            <div id="message"></div>
+            <div id="message">
+                <div class="alert alert-success" role="alert" id="songSuccess">Todo ha salido como se esperaba.</div>
+                <div class="alert alert-danger" role="alert" id="songError">A ocurrido un error.</div>
+            </div>
 
             <div id="content" class="mt-5 mb-5 d-flex flex-wrap gap-3 justify-content-space-evenly">
                 <!-- Songs content will be dynamically loaded here -->

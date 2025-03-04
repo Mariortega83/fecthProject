@@ -32,7 +32,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    public function books()
+    public function songs()
     {
         return $this->belongsToMany(Cancion::class, 'user_canciones')->withPivot('isListened');
     }

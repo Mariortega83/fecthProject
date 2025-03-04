@@ -66,7 +66,7 @@ class CancionController extends Controller
 
         return response()->json([
             'result' => true,
-            'songs' => Cancion::orderBy('nombre')->paginate(4),
+            'songs' =>  Cancion::with('user')->orderBy('nombre')->paginate(4),
             'user' => Auth::user()
         ]);
     } catch (\Exception $e) {
@@ -123,7 +123,7 @@ class CancionController extends Controller
             if ($validator->passes()) {
                 $result = $song->update($request->all());
                 if ($result) {
-                    $songs = Cancion::orderBy('nombre')->paginate(4)->setPath(url('song'));
+                    $songs =  Cancion::with('user')->orderBy('nombre')->paginate(4);
                 } else {
                     $message = 'The song has not been updated.';
                 }
@@ -150,12 +150,12 @@ class CancionController extends Controller
         if ($song != null) {
             try {
                 $result = $song->delete();
-                $songs = Cancion::orderBy('nombre')->paginate(4)->setPath(url('song'));
+                $songs =  Cancion::with('user')->orderBy('nombre')->paginate(4);
     
                 if ($songs->isEmpty()) {
                     $page = $songs->lastPage();
                     $request->merge(['page' => $page]);
-                    $songs = Cancion::orderBy('nombre')->paginate(4)->setPath(url('song'));
+                    $songs = Cancion::with('user')->orderBy('nombre')->paginate(4);
                 }
     
                 $message = 'The song has been deleted successfully.';

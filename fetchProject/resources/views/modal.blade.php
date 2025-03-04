@@ -1,4 +1,3 @@
-
 <!-- Modal  para crear -->
 
 <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
@@ -79,6 +78,7 @@
 </div>
 <!-- Modal  para editar fin -->
 
+<!-- View Modal -->
 <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -89,11 +89,7 @@
             <div class="modal-body" id="viewModalBody">
                 <form id="viewForm">
                     <div class="mb-3">
-                       
-                        <ul class="list-group" id="viewSongs">
-                            
-                            
-                        </ul>
+                        <ul class="list-group" id="viewSongs"></ul>
                     </div>
                 </form>
             </div>
